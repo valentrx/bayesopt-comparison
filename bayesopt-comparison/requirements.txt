@@ -1,0 +1,25 @@
+# One environment for both bo/ and bmoo/ (tested with Python 3.11, conda
+# env "gpmp_env"):
+#   conda create -n gpmp_env python=3.11
+#   conda activate gpmp_env
+#   python -m pip install -r requirements.txt
+#
+# gpmp and gpmp-contrib are not on PyPI: clone both as siblings of this
+# repo (i.e. next to the cloned folder containing bo/, bmoo/, src/), then
+# install them in editable mode with the two -e lines below.
+#   git clone https://github.com/gpmp-dev/gpmp.git
+#   git clone https://github.com/gpmp-dev/gpmp-contrib.git
+-e ../gpmp
+-e ../gpmp-contrib
+
+numpy==2.4.6
+scipy==1.17.1
+matplotlib==3.11.1
+torch==2.14.0
+botorch==0.18.1
+gpytorch==1.15.2
+# bmoo/'s ZDT/DTLZ/WFG test suites: get_problem() only, no pymoo solvers used.
+pymoo==0.6.2
+# bo/optuna_bo.py drives optuna._gp (private API) directly; bmoo/optuna_bmoo.py
+# drives the public ask/tell API. Pinned exactly so both stay reproducible.
+optuna==4.2.1
